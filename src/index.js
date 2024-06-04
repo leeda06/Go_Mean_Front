@@ -13,7 +13,7 @@ const App = () => {
   };
 
   return (
-    <React.StrictMode>
+    <>
       {activeComponent === 'Record' ? <Record /> : <Graph />}
       <nav>
         <div className="Button-back">
@@ -34,7 +34,7 @@ const App = () => {
           </button>
         </div>
       </nav>
-    </React.StrictMode>
+    </>
   );
 };
 
