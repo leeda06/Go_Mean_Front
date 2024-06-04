@@ -1,0 +1,93 @@
+/* graph.css */
+
+
+
+.app-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: black;
+}
+
+.bar-graph-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.bar-container {
+    display: flex;
+    justify-content: center;
+    width: 50vw;
+}
+
+.bar-item {
+    margin: 0 10px;
+    position: relative;
+    transform: rotate(180deg);
+}
+
+.bar {
+    background-color: lightgray;
+    width: 5vw;
+    position: relative;
+    transform: rotate(180deg);
+    border: 3px solid transparent;
+    border-radius: 10px;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: #979797;
+    gap: var(--gap-boxes);
+}
+
+.bar-image {
+    width: 5vw;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.legend-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.legend-item {
+    color: white;
+    font-size: 10px;
+    margin-right: 20px;
+}
+
+.purple {
+    background-image: linear-gradient(to 45deg, #403950, #3E3356), linear-gradient(to 45deg, #494358, #888297, #494358, #494358, #494358, #888297, #494358);
+    color: #B092F6;
+}
+
+.blue {
+    background-image: linear-gradient(to 45deg, #466165, #4A5A5D), linear-gradient(to 45deg, #4D5B5D, #4C696D, #8C9C9F, #507378, #6B7F81, #8C9C9F, #6B7F81);
+    color: #92E7F3;
+}
+
+.pink {
+    background-image: linear-gradient(to 45deg, #624D56, #694A56), linear-gradient(to 45deg, #67555C, #734F5E, #A18E96, #6B4A58, #846C77, #A18E96, #846C77);
+    color: #EB8FB6;
+}
+
+.white {
+    background-image: linear-gradient(to 45deg, #5E5E5F, #646567), linear-gradient(to 45deg, #636365, #6C6D6F, #9D9E9F, #6A6862, #818183, #9D9E9F, #818183);
+    color: #EAEAEA;
+}
+
+.yellow {
+    background-image: linear-gradient(to 45deg, #8f814b, #685D38), linear-gradient(to 45deg, #5F5A46, #72663A, #898163, #7B6D3C, #837B5E, #898163, #837B5E);
+    color: #FDDB63;
+}
+
+.green {
+    background-image: linear-gradient(to 45deg, #4E5A49, #4C6043), linear-gradient(to 45deg, #576151, #536848, #909C8A, #58714C, #6F7D67, #909C8A, #6F7D67);
+    color: #98D07E;
+}
