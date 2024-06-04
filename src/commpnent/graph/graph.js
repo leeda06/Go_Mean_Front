@@ -1,12 +1,15 @@
 import React from 'react';
 import "../../css/graph.css"
 
+// 그래프에 사용될 이미지 파일들을 불러오기
 import Sub_green from '../../img/substract/Substract_green.png';
 import Sub_yellow from '../../img/substract/Substract_yellow.png';
 import Sub_white from '../../img/substract/Substract_white.png';
 import Sub_pink from '../../img/substract/Substract_pink.png';
 import Sub_purple from '../../img/substract/Substract_purple.png';
 import Sub_blue from '../../img/substract/Substract_blue.png';
+
+// 그래프 항목 정의
 const legendItems = [
   { category: '건강', color: '연두색', gif: Sub_green, className: 'green', values: 80 },
   { category: '금전', color: '노랑색', gif: Sub_yellow, className: 'yellow', values: 120 },
@@ -16,26 +19,26 @@ const legendItems = [
   { category: '학업', color: '파란색', gif: Sub_blue, className: 'blue', values: 100 },
 ];
 
-
+// 바 그래프 컴포넌트 정의
 const BarGraph = ({ values }) => {
-  // Find the maximum value in the array
+  // 값 배열에서 최대값 찾기
   const maxValue = Math.max(...values);
 
   return (
     <div className="bar-graph-container">
-      {/* Bar Graph */}
+      {/* 바 그래프 컨테이너 */}
       <div className="bar-container">
         {values.map((value, index) => (
           <div key={index} className={`bar-item`}>
-            {/* Bar */}
+            {/* 바 */}
             <div className={`bar ${legendItems[index].className}`} style={{ height: `${(value / maxValue) * 50}vh` }}>
-              {/* gif */}
+              {/* 이미지(gif) */}
               <img src={legendItems[index].gif} alt={`Image ${index}`} style={{ bottom: `${(value / maxValue) * 52}vh` }} className="bar-image" />
             </div>
           </div>
         ))}
       </div>
-      {/* Legend */}
+      {/* 범례 컨테이너 */}
       <div className="legend-container">
         {legendItems.map((item, index) => (
           <span key={index} className="legend-item" style={{ color: item.color }}>{item.category} : {item.color}</span>
@@ -45,9 +48,8 @@ const BarGraph = ({ values }) => {
   );
 };
 
-// Example usage
-// Example usage
-const values = legendItems.map(item => item.values); // Extracting values from legendItems
+// 예제 사용법
+const values = legendItems.map(item => item.values); // legendItems에서 값을 추출
 
 const App = () => {
   return (
@@ -58,4 +60,5 @@ const App = () => {
     </div>
   );
 };
+
 export default App;

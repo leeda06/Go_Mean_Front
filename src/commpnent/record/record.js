@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../../css/recode.css';
 import img from '../../img/image.png';
 
+// 이미지 파일들 임포트
 import Sub_green_off from '../../img/substract/Substract_green_off.png';
 import Sub_yellow_off from '../../img/substract/Substract_yellow_off.png';
 import Sub_white_off from '../../img/substract/Substract_white_off.png';
@@ -16,6 +17,7 @@ import Sub_pink from '../../img/substract/Substract_pink.png';
 import Sub_purple from '../../img/substract/Substract_purple.png';
 import Sub_blue from '../../img/substract/Substract_blue.png';
 
+// 카테고리 데이터 객체 정의
 const categoryData = {
   '건강': { color: 'green', images: [Sub_green, Sub_green_off] },
   '금전': { color: 'yellow', images: [Sub_yellow, Sub_yellow_off] },
@@ -25,7 +27,7 @@ const categoryData = {
   '학업': { color: 'blue', images: [Sub_blue, Sub_blue_off] }
 };
 
-
+// 텍스트 박스 데이터 객체 정의
 const textBoxes = {
   '건강': [
     { title: '저녁으로 뭐먹지', name: '김미림', content: '돈까쓰, 치킨, 피자, 초밥 다 먹고 싶다 아 저녁 뭐먹지돈까쓰, 치킨, 피자, 초밥 다 먹고 싶다아 저녁 뭐먹지돈까쓰, 치킨, 피자, 초밥 다 먹고 싶다돈까쓰, 치킨, 피자, 초밥 다 먹ㅇㄹㄹㅇㄹㅇㅇ고 싶다...', date: "2024.07.07" },
@@ -85,31 +87,31 @@ const textBoxes = {
 };
 
 const App = () => {
-  // 데이터 기본값
+  // 상태 초기값 설정
   const [selected, setSelected] = useState({ category: '건강', color: 'green' });
-  // 창 띄워져 있는지 확인
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // 질문 값 받기
   const [selectedTextBox, setSelectedTextBox] = useState(null);
   const textBoxesRef = useRef([]);
   const containerRef = useRef(null);
 
+  // 선택된 카테고리가 변경될 때마다 텍스트 박스의 위치를 재설정
   useEffect(() => {
     positionTextBoxes();
   }, [selected]);
 
+  // 선택된 카테고리가 변경될 때마다 텍스트 박스 참조 초기화
   useEffect(() => {
     textBoxesRef.current = [];
   }, [selected]);
 
-  // 질문 테마 리스트
+  // 텍스트 박스를 위치시키는 함수
   const positionTextBoxes = () => {
     const boxes = textBoxesRef.current.filter(Boolean);
     const container = containerRef.current;
 
     if (!container || boxes.length === 0) return;
 
-    const columns = 3;
+    const columns = 3; // 열 개수
     const columnHeights = Array(columns).fill(0);
     const columnWidth = (container.offsetWidth - (columns - 1) * 40) / columns;
 
@@ -128,16 +130,19 @@ const App = () => {
     container.style.height = `${Math.max(...columnHeights)}px`;
   };
 
+  // 모달 열기 함수
   const openModal = (textBox) => {
     setIsModalOpen(true);
     setSelectedTextBox(textBox);
   };
 
+  // 모달 닫기 함수
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedTextBox(null);
   };
 
+  // 카테고리 렌더링 함수
   const renderCategories = () => {
     return Object.keys(textBoxes).map(category => {
       const { color, images } = categoryData[category];
@@ -161,7 +166,7 @@ const App = () => {
     });
   };
 
-  // 답변 ( 댓글 ) 함수
+  // 텍스트 박스 렌더링 함수
   const renderTextBoxes = () => {
     return selected.category && textBoxes[selected.category].map(({ id, name, title, content, date }, index) => (
       <div
@@ -179,18 +184,11 @@ const App = () => {
     ));
   };
 
+  // 채팅 메시지 데이터
   const chatMessages = [
     { name: 'John', time: '23:09', content: 'Hello there!' },
     { name: 'Alice', time: '23:10', content: 'Hi John!' },
-    { name: 'Alice', time: '23:10', content: 'Hi John!' },
-    { name: 'Alice', time: '23:10', content: 'Hi John!' },
-    { name: 'Alice', time: '23:10', content: 'Hi John!' },
-    { name: 'Alice', time: '23:10', content: 'Hi John!' },
-    { name: 'Alice', time: '23:10', content: 'Hi John!' },
-    { name: 'Alice', time: '23:10', content: 'Hi John!' },
-    { name: 'Alice', time: '23:10', content: 'Hi John!' },
-    { name: 'Alice', time: '23:10', content: 'Hi John!' },
-    { name: 'Alice', time: '23:10', content: 'Hi John!' }
+    // 추가 채팅 메시지
   ];
 
   return (
@@ -246,7 +244,6 @@ const App = () => {
         </div>
       )}
     </div>
-
   );
 };
 
