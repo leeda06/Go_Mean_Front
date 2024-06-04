@@ -1,0 +1,38 @@
+nav {
+  position: fixed;
+  left: calc(50% - 150px);
+  bottom: 120px;
+  z-index: 1; /* 다른 요소들보다 위에 표시되도록 설정 */
+}
+
+
+.Button-back {
+  position: absolute;
+  width: 300px;
+  height: 50px;
+  margin-bottom: -1000px;
+  background-color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  padding: 10px;
+}
+
+.slide-btn {
+  border-radius: 40px;
+  height: 55px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+}
+
+.slide-btn:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
