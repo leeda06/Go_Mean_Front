@@ -11,6 +11,12 @@ const legendItems = [
     { category: '인간관계', color: '분홍색', gif: require('../../img/substract/Substract_pink.png'), className: 'pink', values: 90 },
     { category: '취업', color: '보라색', gif: require('../../img/substract/Substract_purple.png'), className: 'purple', values: 150 },
     { category: '학업', color: '파란색', gif: require('../../img/substract/Substract_blue.png'), className: 'blue', values: 100 },
+    { category: '건강', color: '연두색', gif: require('../../img/gif/Substract_green.gif'), className: 'green', values: 160 },
+    { category: '금전', color: '노랑색', gif: require('../../img/gif/Substract_yellow.gif'), className: 'yellow', values: 120 },
+    { category: '개인', color: '흰색', gif: require('../../img/gif/Substract_white.gif'), className: 'white', values: 60 },
+    { category: '인간관계', color: '분홍색', gif: require('../../img/gif/Substract_pink.gif'), className: 'pink', values: 90 },
+    { category: '취업', color: '보라색', gif: require('../../img/gif/Substract_purple.gif'), className: 'purple', values: 150 },
+    { category: '학업', color: '파란색', gif: require('../../img/gif/Substract_blue.gif'), className: 'blue', values: 100 },
 ];
 
 // 예제 사용법
