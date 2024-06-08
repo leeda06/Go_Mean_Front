@@ -18,7 +18,7 @@ function Write() {
     const [showPopup, setShowPopup] = useState(false); 
     const [loading, setLoading] = useState(false);
 
-    // 
+    // 고민입력창 확인
     useEffect(() => {
         const inputContent = document.getElementById('Input-Content');
 
@@ -62,7 +62,10 @@ function Write() {
             alert("모든 입력란을 채워주세요.");
             return;
         }
+
+        // 로딩 실행
         setLoading(true);
+        // 조언 출력
         setTimeout(() => {
             setAdvice('친구야, 걱정하지 마. 우리 모두 졸업 후에 똑같은 고민을 했을 거야. 사실 아무도 완벽한 선택을 한 사람은 없어. 먼저 자신의 강점을 파악해봐. 경제학 전공으로 어떤 분야에 관심이 있는지, 어떤 경험을 쌓았는지를 고려해보면 도움이 될 거야. 내 이력서 나 자기소개서 작성하는 것은 귀찮긴 하지만, 이건 너 자신을 어필하는 좋은 기회야. 자신을 어떻게 표현할지 고민 중인데, 너의 열정과 노력, 그리고 적극적인 자세를 강조해봐.');
             setShowGomGomE(true);
@@ -80,6 +83,7 @@ function Write() {
         setShowPopup(false);
     };
 
+    // 고민입력 창이 모두 입력 됨 -> 버튼 색상 하얀색으로 변경 / 입력되지 않음 -> 버튼 색상 회색으로 유지
     useEffect(() => {
         const adviceButton = document.getElementById('Advice-button');
         const solutionButton = document.getElementById('Solution-button');
