@@ -1,42 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './css/index.css';
 
-import Record from './commpnent/record/record';
-import Graph from './commpnent/graph/graph';
+// 홈화면 렌더링
+import Home from './commpnent/home/home.js';
 
-const App = () => {
-  const [activeComponent, setActiveComponent] = useState('Graph');
+// 고민작성 화면 렌더링
+// import Write from './commpnent/write/write.js';
 
-  const handleButtonClick = (component) => {
-    setActiveComponent(component);
-  };
+// 통계 화면 렌더링
+// import Graph from './commpnent/graph/graph.js';
 
-  return (
-    <>
-      {activeComponent === 'Record' ? <Record /> : <Graph />}
-      <nav>
-        <div className="Button-back">
-          <button className={`slide-btn`}>홈</button>
-          <button
-            className={`slide-btn Trash-btn ${activeComponent === 'Record' ? 'active' : ''}`}
-            style={{ backgroundColor: `${activeComponent === 'Record' ? '#ffffff50' : ''}` }}
-            onClick={() => handleButtonClick('Record')}
-          >
-            쓰레기 보관함
-          </button>
-          <button
-            className={`slide-btn Statistics-btn ${activeComponent === 'Graph' ? 'active' : ''}`}
-            style={{ backgroundColor: `${activeComponent === 'Graph' ? '#ffffff50' : ''}` }}
-            onClick={() => handleButtonClick('Graph')}
-          >
-            통계
-          </button>
-        </div>
-      </nav>
-    </>
-  );
-};
+// 쓰레기보관함 화면 렌더링
+// import Record from './commpnent/record/record';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(
+	<React.StrictMode>
+		<Home />
+    	{/* <Write /> */}
+    	{/* <Graph /> */}
+    	{/* <Record /> */}
+  	</React.StrictMode>
+);
