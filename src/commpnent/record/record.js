@@ -10,7 +10,6 @@ const App = () => {
 	const [selected, setSelected] = useState({ category: '건강', color: 'green' });
   	const [isModalOpen, setIsModalOpen] = useState(false);
   	const [selectedTextBox, setSelectedTextBox] = useState(null);
-	const [activeComponent, setActiveComponent] = useState('Record');
   	const textBoxesRef = useRef([]);
   	const containerRef = useRef(null);
   	const selectedChange = selected;
@@ -23,9 +22,6 @@ const App = () => {
     	textBoxesRef.current = [];
   	}, [selected]);
 
-	const handleButtonClick = component => {
-        setActiveComponent(component);
-    };
 
   	const positionTextBoxes = () => {
     	const boxes = textBoxesRef.current.filter(Boolean);
@@ -91,32 +87,6 @@ const App = () => {
           			img={img}
         		/>
       		)}
-
-<nav>
-                <div className="Button-back">
-                    <button
-                        className={`Slide-btn ${activeComponent === 'Home' ? 'active' : ''}`}
-                        style={{ backgroundColor: `${activeComponent === 'Home' ? '#ffffff50' : ''}` }}
-                        onClick={() => handleButtonClick('Home')}
-                    >
-                        홈
-                    </button>
-                    <button
-                        className={`Slide-btn Trash-btn ${activeComponent === 'Record' ? 'active' : ''}`}
-                        style={{ backgroundColor: `${activeComponent === 'Record' ? '#ffffff50' : ''}` }}
-                        onClick={() => handleButtonClick('Record')}
-                    >
-                        쓰레기 보관함
-                    </button>
-                    <button
-                        className={`Slide-btn Statistics-btn ${activeComponent === 'Graph' ? 'active' : ''}`}
-                        style={{ backgroundColor: `${activeComponent === 'Graph' ? '#ffffff50' : ''}` }}
-                        onClick={() => handleButtonClick('Graph')}
-                    >
-                        통계
-                    </button>
-                </div>
-            </nav>
     	</div>
   	);
 };

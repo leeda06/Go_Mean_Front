@@ -1,24 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
 // 홈화면 렌더링
 import Home from './commpnent/home/home.js';
 
 // 고민작성 화면 렌더링
-// import Write from './commpnent/write/write.js';
+import Write from './commpnent/write/write.js';
 
 // 통계 화면 렌더링
-// import Graph from './commpnent/graph/graph.js';
+import Graph from './commpnent/graph/graph.js';
 
 // 쓰레기보관함 화면 렌더링
-// import Record from './commpnent/record/record';
+import Record from './commpnent/record/record.js';
+
+const App = () => {
+    const [activeComponent, setActiveComponent] = useState('Home');
+
+    const handleButtonClick = (component) => {
+        setActiveComponent(component);
+    };
+
+    const renderComponent = () => {
+        switch (activeComponent) {
+            case 'Home':
+                return <Home />;
+            case 'Write':
+                return <Write />;
+            case 'Graph':
+                return <Graph />;
+            case 'Record':
+                return <Record />;
+            default:
+                return <Home />;
+        }
+    };
+
+    return (
+        <React.StrictMode>
+            {/* 버튼 */}
+            <nav>
+                <div className="Button-back">
+                    <button
+                        className={`Slide-btn ${activeComponent === 'Home' ? 'active' : ''}`}
+                        style={{ backgroundColor: `${activeComponent === 'Home' ? '#ffffff50' : ''}` }}
+                        onClick={() => handleButtonClick('Home')}
+                    >
+                        홈
+                    </button>
+                    <button
+                        className={`Slide-btn Trash-btn ${activeComponent === 'Record' ? 'active' : ''}`}
+                        style={{ backgroundColor: `${activeComponent === 'Record' ? '#ffffff50' : ''}` }}
+                        onClick={() => handleButtonClick('Record')}
+                    >
+                        쓰레기 보관함
+                    </button>
+                    <button
+                        className={`Slide-btn Statistics-btn ${activeComponent === 'Graph' ? 'active' : ''}`}
+                        style={{ backgroundColor: `${activeComponent === 'Graph' ? '#ffffff50' : ''}` }}
+                        onClick={() => handleButtonClick('Graph')}
+                    >
+                        통계
+                    </button>
+                </div>
+            </nav>
+            {renderComponent()}
+        </React.StrictMode>
+    );
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-	<React.StrictMode>
-		<Home />
-    	{/* <Write /> */}
-    	{/* <Graph /> */}
-    	{/* <Record /> */}
-  	</React.StrictMode>
-);
+root.render(<App />);

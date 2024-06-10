@@ -142,32 +142,6 @@ function Home() {
                 <p className="Color Blue">&nbsp;: 파란색</p>
             </div>
 
-            {/* 버튼 */}
-            <nav>
-                <div className="Button-back">
-                    <button
-                        className={`Slide-btn ${activeComponent === 'Home' ? 'active' : ''}`}
-                        style={{ backgroundColor: `${activeComponent === 'Home' ? '#ffffff50' : ''}` }}
-                        onClick={() => handleButtonClick('Home')}
-                    >
-                        홈
-                    </button>
-                    <button
-                        className={`Slide-btn Trash-btn ${activeComponent === 'Record' ? 'active' : ''}`}
-                        style={{ backgroundColor: `${activeComponent === 'Record' ? '#ffffff50' : ''}` }}
-                        onClick={() => handleButtonClick('Record')}
-                    >
-                        쓰레기 보관함
-                    </button>
-                    <button
-                        className={`Slide-btn Statistics-btn ${activeComponent === 'Graph' ? 'active' : ''}`}
-                        style={{ backgroundColor: `${activeComponent === 'Graph' ? '#ffffff50' : ''}` }}
-                        onClick={() => handleButtonClick('Graph')}
-                    >
-                        통계
-                    </button>
-                </div>
-            </nav>
         </div>
     );
 }
