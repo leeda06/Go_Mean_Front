@@ -7,88 +7,88 @@ import Modal from './modal.js';
 import { categoryData, textBoxes } from './Data/data.js';
 
 const App = () => {
-	const [selected, setSelected] = useState({ category: '건강', color: 'green' });
-  	const [isModalOpen, setIsModalOpen] = useState(false);
-  	const [selectedTextBox, setSelectedTextBox] = useState(null);
-  	const textBoxesRef = useRef([]);
-  	const containerRef = useRef(null);
-  	const selectedChange = selected;
+    const [selected, setSelected] = useState({ category: '건강', color: 'green' });
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedTextBox, setSelectedTextBox] = useState(null);
+    const textBoxesRef = useRef([]);
+    const containerRef = useRef(null);
+    const selectedChange = selected;
 
-  	useEffect(() => {
-    	positionTextBoxes();
-  	}, [selected]);
+    useEffect(() => {
+        positionTextBoxes();
+    }, [selected]);
 
-  	useEffect(() => {
-    	textBoxesRef.current = [];
-  	}, [selected]);
+    useEffect(() => {
+        textBoxesRef.current = [];
+    }, [selected]);
 
+    const positionTextBoxes = () => {
+        const boxes = textBoxesRef.current.filter(Boolean);
+        const container = containerRef.current;
 
-  	const positionTextBoxes = () => {
-    	const boxes = textBoxesRef.current.filter(Boolean);
-    	const container = containerRef.current;
+        if (!container || boxes.length === 0) return;
 
-    	if (!container || boxes.length === 0) return;
+        const columns = 3; // 열 개수
+        const columnHeights = Array(columns).fill(0);
+        const columnWidth = (container.offsetWidth - (columns - 1) * 40) / columns;
 
-    	const columns = 3; // 열 개수
-    	const columnHeights = Array(columns).fill(0);
-    	const columnWidth = (container.offsetWidth - (columns - 1) * 40) / columns;
+        boxes.forEach(box => {
+            const minHeight = Math.min(...columnHeights);
+            const column = columnHeights.indexOf(minHeight);
+            const x = column * (columnWidth + 40);
+            const y = minHeight;
 
-    	boxes.forEach(box => {
-      		const minHeight = Math.min(...columnHeights);
-      		const column = columnHeights.indexOf(minHeight);
-      		const x = column * (columnWidth + 40);
-      		const y = minHeight;
+            if (box) {
+                box.style.transform = `translate(${x}px, ${y}px)`;
+                columnHeights[column] += box.offsetHeight + 40;
+            }
+        });
 
-      		if (box) {
-        		box.style.transform = `translate(${x}px, ${y}px)`;
-        		columnHeights[column] += box.offsetHeight + 40;
-      		}
-    	});
+        container.style.height = `${Math.max(...columnHeights)}px`;
+    };
 
-    	container.style.height = `${Math.max(...columnHeights)}px`;
-  	};
+    const openModal = (textBox) => {
+        setIsModalOpen(true);
+        setSelectedTextBox(textBox);
+    };
 
-  	const openModal = (textBox) => {
-    	setIsModalOpen(true);
-    	setSelectedTextBox(textBox);
-  	};
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedTextBox(null);
+    };
 
-  	const closeModal = () => {
-    	setIsModalOpen(false);
-    	setSelectedTextBox(null);
-  	};
-
-	//만약 selectedChange와 selected의 값이 다르다면 selectedChange의 값을 변경하고 TextBoxContainer를 없애고 다시 생성하는 코드 삽입
-
-  	return (
-    	<div className='main' style={{ boxShadow: isModalOpen ? 'inset' : '' }}>
-    		<div className={`container ${isModalOpen ? 'modal-open' : ''}`}>
-    	    	<div className='div'>
-    	      		<CategoryList
-    	        		selected={selected}
-    	        		setSelected={setSelected}
-    	        		categoryData={categoryData}
-    	        		textBoxes={textBoxes}
-          			/>
-          			<TextBoxContainer
-            			selected={selected}
-            			textBoxes={textBoxes}
-            			categoryData={categoryData}
-            			textBoxesRef={textBoxesRef}
-            			containerRef={containerRef}
-            			openModal={openModal}
-          			/>
-        		</div>
-      		</div>
-      		{isModalOpen && selectedTextBox && (
-        		<Modal
-          			selectedTextBox={selectedTextBox}
-          			closeModal={closeModal}
-          			img={img}
-        		/>
-      		)}
-    	</div>
-  	);
+    return (
+        <div className='main' style={{ boxShadow: isModalOpen ? 'inset' : '' }}>
+            <div className={`container ${isModalOpen ? 'modal-open' : ''}`}>
+                <div className='div'>
+                    <CategoryList
+                        selected={selected}
+                        setSelected={setSelected}
+                        categoryData={categoryData}
+                        textBoxes={textBoxes}
+                    />
+                    <TextBoxContainer
+                        selected={selected}
+                        textBoxes={textBoxes}
+                        categoryData={categoryData}
+                        textBoxesRef={textBoxesRef}
+                        containerRef={containerRef}
+                        openModal={openModal}
+                    />
+                </div>
+            </div>
+            {isModalOpen && selectedTextBox && (
+                <>
+                    <div className="modal-overlay" onClick={closeModal}></div>
+                    <Modal
+                        selectedTextBox={selectedTextBox}
+                        closeModal={closeModal}
+                        img={img}
+                    />
+                </>
+            )}
+        </div>
+    );
 };
 
 export default App;
