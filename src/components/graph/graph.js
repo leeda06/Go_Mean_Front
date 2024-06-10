@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import '../../css/graph.css';
 import BarGraph from './barGraph.js';
-
-// 범례 항목 정의
+import '../../components/graph/barGraph.js'
+// 값 이름 , 색, 이미지 , class이름 , 그래프 크기 (개수)
 const legendItems = [
     { category: '건강', color: '연두색', gif: require('../../img/substract/Substract_green.png'), className: 'green', values: 160 },
     { category: '금전', color: '노랑색', gif: require('../../img/substract/Substract_yellow.png'), className: 'yellow', values: 120 },
