@@ -23,7 +23,7 @@ const BarGraph = ({ values, legendItems }) => {
             {/* 범례 컨테이너 */}
             <div className="legend-container">
                 {legendItems.map((item, index) => (
-                    <span key={index} className="legend-item" style={{ color: item.color }}>{item.category} : {item.color}</span>
+                    <span key={index} className="legend-item" style={{ color: item.color }}><strong>{item.category}</strong> : {item.color}</span>
                 ))}
             </div>
         </div>

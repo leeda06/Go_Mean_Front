@@ -10,10 +10,12 @@
 
 /* 막대 그래프 컨테이너 스타일 */
 .bar-graph-container {
+    position: absolute;
+    bottom: calc(13vh + 12px);
+    left: calc(-45vh + 6px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
 }
 
 /* 개별 막대 컨테이너 스타일 */
@@ -24,7 +26,7 @@
 }
 
 .bar-item {
-    margin: 0 10px;
+    margin: 0 20px;
     position: relative;
     transform: rotate(180deg);
 }
@@ -32,7 +34,7 @@
 /* 막대 스타일 */
 .bar {
     background-color: lightgray;
-    width: 5vw;
+    width: 6vw;
     position: relative;
     transform: rotate(180deg);
     border: 3px solid transparent;
@@ -61,7 +63,7 @@
 /* 범례 아이템 스타일 */
 .legend-item {
     color: white;
-    font-size: 10px;
+    font-size: 16px;
     margin-right: 20px;
 }
 
