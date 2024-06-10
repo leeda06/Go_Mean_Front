@@ -15,6 +15,7 @@ import Record from './commpnent/record/record.js';
 
 const App = () => {
     const [activeComponent, setActiveComponent] = useState('Home');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleButtonClick = (component) => {
         setActiveComponent(component);
@@ -37,33 +38,34 @@ const App = () => {
 
     return (
         <React.StrictMode>
-            {/* 버튼 */}
-            <nav>
-                <div className="Button-back">
-                    <button
-                        className={`Slide-btn ${activeComponent === 'Home' ? 'active' : ''}`}
-                        style={{ backgroundColor: `${activeComponent === 'Home' ? '#ffffff50' : ''}` }}
-                        onClick={() => handleButtonClick('Home')}
-                    >
-                        홈
-                    </button>
-                    <button
-                        className={`Slide-btn Trash-btn ${activeComponent === 'Record' ? 'active' : ''}`}
-                        style={{ backgroundColor: `${activeComponent === 'Record' ? '#ffffff50' : ''}` }}
-                        onClick={() => handleButtonClick('Record')}
-                    >
-                        쓰레기 보관함
-                    </button>
-                    <button
-                        className={`Slide-btn Statistics-btn ${activeComponent === 'Graph' ? 'active' : ''}`}
-                        style={{ backgroundColor: `${activeComponent === 'Graph' ? '#ffffff50' : ''}` }}
-                        onClick={() => handleButtonClick('Graph')}
-                    >
-                        통계
-                    </button>
-                </div>
-            </nav>
-            {renderComponent()}
+            <div>
+                <nav>
+                    <div className="Button-back" style={ isModalOpen ?  {filter: 'blur(10px)'} : {filter: 'none'}}>
+                        <button
+                            className={`Slide-btn ${activeComponent === 'Home' ? 'active' : ''}`}
+                            style={{ backgroundColor: `${activeComponent === 'Home' ? '#ffffff50' : ''}` }}
+                            onClick={() => handleButtonClick('Home')}
+                        >
+                            홈
+                        </button>
+                        <button
+                            className={`Slide-btn Trash-btn ${activeComponent === 'Record' ? 'active' : ''}`}
+                            style={{ backgroundColor: `${activeComponent === 'Record' ? '#ffffff50' : ''}` }}
+                            onClick={() => handleButtonClick('Record')}
+                        >
+                            쓰레기 보관함
+                        </button>
+                        <button
+                            className={`Slide-btn Statistics-btn ${activeComponent === 'Graph' ? 'active' : ''}`}
+                            style={{ backgroundColor: `${activeComponent === 'Graph' ? '#ffffff50' : ''}` }}
+                            onClick={() => handleButtonClick('Graph')}
+                        >
+                            통계
+                        </button>
+                    </div>
+                </nav>
+                { renderComponent() }
+            </div>
         </React.StrictMode>
     );
 };
