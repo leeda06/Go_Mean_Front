@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
-// 이미지 파일 (곰곰이, 로딩)
-import GomGomE from '../../img/gomgomE.png'; 
+// 이미지 파일 (백그라운드, 곰곰이, 로딩)
+import Background from '../../img/background.gif';
+import GomGomE from '../../img/gomgomE.png';
 import Loding from '../../img/loding.gif';
 
 // 고민작성 화면 CSS 파일
 import '../../css/write.css';
 
-function Write() {
+function Write({ setActiveComponent }) {
     // 필요한 Hook 작성
     const [title, setTitle] = useState('');
     const [writer, setWriter] = useState('');
@@ -74,13 +76,13 @@ function Write() {
         }, 3000);
     };
 
-    // 보관 버튼 클릭시 팝업이 나오고 팝업에 보관함 버튼 클릭시 팝업 닫기 실행 지정
+    // 보관 버튼 클릭시 팝업이 나오고 팝업에 보관함 버튼 클릭시 보관함으로 이동 실행
     const handleSave = () => {
         setShowPopup(true);
     };
 
-    const handleClosePopup = () => {
-        setShowPopup(false);
+    const moveTorecord = () => {
+        setActiveComponent("Record")
     };
 
     // 고민입력 창이 모두 입력 됨 -> 버튼 색상 하얀색으로 변경 / 입력되지 않음 -> 버튼 색상 회색으로 유지
@@ -104,8 +106,18 @@ function Write() {
         };
     }, []);
 
+    // Delete 버튼 클릭 시 홈 페이지로 이동하는 함수
+    const handleDelete = () => {
+        setActiveComponent("Home")
+    };       
+
     return (
-        // 고민작성 컨테이너
+        <div>
+        <div className='background-container'>
+            <img src={Background} className='background' />
+        </div>
+
+        {/* 고민작성 컨테이너 */}
         <div className='Write-Container'>
             <div className='Write-Gomean'>
                 <form className='Input-Text' onSubmit={handleSubmit}>
@@ -173,11 +185,14 @@ function Write() {
                     <div className='Popup-Content'>
                         <h1>&nbsp;&nbsp;고민이 보관 되었습니다.&nbsp;&nbsp;</h1>
                         <p>저장된 고민을 확인해보세요.</p>
-                        <button className='View-button' onClick={handleClosePopup}>보관함</button>
+                        <button className='View-button' onClick={moveTorecord}>보관함</button>
                     </div>
                 </div>
             )}
 
+            <button className='delete-button' onClick={handleDelete}><i className='bi bi-x'></i></button>
+
+        </div>
         </div>
     );
 }

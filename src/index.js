@@ -24,15 +24,15 @@ const App = () => {
     const renderComponent = () => {
         switch (activeComponent) {
             case 'Home':
-                return <Home />;
+                return <Home onNavigate={handleButtonClick} />;
             case 'Write':
-                return <Write />;
+                return <Write setActiveComponent={setActiveComponent} />;
             case 'Graph':
                 return <Graph />;
             case 'Record':
                 return <Record />;
             default:
-                return <Home />;
+                return <Home onNavigate={handleButtonClick} />;
         }
     };
 
