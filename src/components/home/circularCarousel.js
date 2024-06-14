@@ -28,6 +28,11 @@ const CircularCarousel = ({ items, interval = 8000, onImageClick }) => {
         return () => clearTimeout(timeoutId);
     }, [currentIndex, totalItems]);
 
+    const handleImageClick = (index) => {
+        // 클릭된 인덱스를 onImageClick 프롭으로 전달
+        onImageClick(index);
+    };
+
     return (
         <div className="carousel-container">
             <div
@@ -39,12 +44,12 @@ const CircularCarousel = ({ items, interval = 8000, onImageClick }) => {
             >
                 {items.map((item, index) => (
                     <div className={`carousel-item slide-${index}`} key={index}>
-                        <img src={item} alt={`Item ${index}`} onClick={onImageClick} />
+                        <img src={item} alt={`Item ${index}`} onClick={() => handleImageClick(index)} />
                     </div>
                 ))}
                 {/* 마지막 슬라이드 다음에 첫 번째 슬라이드 복제 */}
                 <div className={`carousel-item slide-${totalItems}`} key={totalItems}>
-                    <img src={items[0]} alt={`Item 0`} onClick={onImageClick} />
+                    <img src={items[0]} alt={`Item 0`} onClick={() => handleImageClick(0)} />
                 </div>
             </div>
         </div>
