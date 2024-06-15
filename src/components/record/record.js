@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../../css/recode.css';
 import img from '../../img/image.png';
-import CategoryList from './categoryList.js';
-import TextBoxContainer from './textBoxContainer.js';
-import Modal from './modal.js';
-import { categoryData } from './Data/data.js'; // categoryData를 임포트
+import CategoryList from './categoryList';
+import TextBoxContainer from './textBoxContainer';
+import Modal from './modal';
+import { categoryData } from './Data/data.js';
 import axios from 'axios';
 
 const Record = () => {
@@ -55,7 +55,7 @@ const Record = () => {
 
         if (!container || boxes.length === 0) return;
 
-        const columns = 3; // 열 개수
+        const columns = 3;
         const columnHeights = Array(columns).fill(0);
         const columnWidth = (container.offsetWidth - (columns - 1) * 40) / columns;
 

@@ -14,7 +14,7 @@ const TextBoxContainer = ({ selected, textBoxes, categoryData, textBoxesRef, con
                     <div className='name'>{nickname}</div>
                     <div className='text'>{content}</div>
                     <div className='date'>{new Date(created_at).toLocaleDateString()}</div>
-                    <img className='img' src={`${categoryData[selected.category].images[0]}`} />
+                    <img className='img' src={`${categoryData[selected.category].images[0]}`} alt={`${selected.category}`} />
                 </div>
             ))}
         </div>
