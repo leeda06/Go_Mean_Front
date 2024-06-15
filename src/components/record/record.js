@@ -4,23 +4,50 @@ import img from '../../img/image.png';
 import CategoryList from './categoryList.js';
 import TextBoxContainer from './textBoxContainer.js';
 import Modal from './modal.js';
-import { categoryData, textBoxes } from './Data/data.js';
+import { categoryData } from './Data/data.js'; // categoryData를 임포트
+import axios from 'axios';
 
-const App = () => {
-    const [selected, setSelected] = useState({ category: '건강', color: 'green' });
+const Record = () => {
+    const [selected, setSelected] = useState({ category: '건강', color: 'green', id: categoryData['건강'].id });
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTextBox, setSelectedTextBox] = useState(null);
+    const [textBoxes, setTextBoxes] = useState({});
     const textBoxesRef = useRef([]);
     const containerRef = useRef(null);
-    const selectedChange = selected;
+
+    useEffect(() => {
+        fetchWorries();
+    }, [selected]);
 
     useEffect(() => {
         positionTextBoxes();
-    }, [selected]);
+    }, [textBoxes]);
 
     useEffect(() => {
         textBoxesRef.current = [];
     }, [selected]);
+
+    const fetchWorries = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/worries');
+            const fetchedWorries = response.data;
+            const categorizedWorries = categorizeWorries(fetchedWorries);
+            setTextBoxes(categorizedWorries);
+        } catch (error) {
+            console.error('Error fetching worries:', error);
+        }
+    };
+
+    const categorizeWorries = (worries) => {
+        return worries.reduce((acc, worry) => {
+            const { category_id } = worry;
+            if (!acc[category_id]) {
+                acc[category_id] = [];
+            }
+            acc[category_id].push(worry);
+            return acc;
+        }, {});
+    };
 
     const positionTextBoxes = () => {
         const boxes = textBoxesRef.current.filter(Boolean);
@@ -63,7 +90,7 @@ const App = () => {
                 <div className='div'>
                     <CategoryList
                         selected={selected}
-                        setSelected={setSelected}
+                        setSelected={(newSelected) => setSelected({ ...newSelected, id: categoryData[newSelected.category].id })}
                         categoryData={categoryData}
                         textBoxes={textBoxes}
                     />
@@ -91,4 +118,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Record;
