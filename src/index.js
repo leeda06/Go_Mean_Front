@@ -15,10 +15,14 @@ import Record from './components/record/record.js';
 
 const App = () => {
     const [activeComponent, setActiveComponent] = useState('Home');
+    const [selectedIndex, setSelectedIndex] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleButtonClick = (component) => {
+    const handleButtonClick = (component, index = null) => {
         setActiveComponent(component);
+        if (index !== null) {
+            setSelectedIndex(index);
+        }
     };
 
     const renderComponent = () => {
@@ -26,7 +30,7 @@ const App = () => {
             case 'Home':
                 return <Home onNavigate={handleButtonClick} />;
             case 'Write':
-                return <Write setActiveComponent={setActiveComponent} />;
+                return <Write setActiveComponent={setActiveComponent} selectedIndex={selectedIndex} />;
             case 'Graph':
                 return <Graph />;
             case 'Record':

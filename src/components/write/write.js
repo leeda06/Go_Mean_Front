@@ -10,8 +10,9 @@ import Loding from '../../img/loding.gif';
 import '../../css/write.css';
 import axios from "axios";
 
-function Write({setActiveComponent}) {
+function Write({setActiveComponent, selectedIndex}) {
     // 필요한 Hook 작성
+    const [categoryId, setCategoryId] = useState('');
     const [title, setTitle] = useState('');
     const [writer, setWriter] = useState('');
     const [content, setContent] = useState('');
@@ -45,8 +46,7 @@ function Write({setActiveComponent}) {
         };
     }, []);
 
-    // 제목, 작성자, 콘텐츠 작성 여부 확인 후, 조언받기 버튼 클릭시 로딩 -> 조언 출력되게 지정
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!title || !writer || !content) {
             setAdvice('');
@@ -54,19 +54,45 @@ function Write({setActiveComponent}) {
             return;
         }
 
-        // 로딩 실행
         setLoading(true);
-        // 조언 출력
         setAdvice('친구야, 걱정하지 마. 우리 모두 졸업 후에 똑같은 고민을 했을 거야. 사실 아무도 완벽한 선택을 한 사람은 없어. 먼저 자신의 강점을 파악해봐. 경제학 전공으로 어떤 분야에 관심이 있는지, 어떤 경험을 쌓았는지를 고려해보면 도움이 될 거야. 내 이력서 나 자기소개서 작성하는 것은 귀찮긴 하지만, 이건 너 자신을 어필하는 좋은 기회야. 자신을 어떻게 표현할지 고민 중인데, 너의 열정과 노력, 그리고 적극적인 자세를 강조해봐.');
+
+        let newCategoryId;
+        switch (selectedIndex) {
+            case 0:
+                newCategoryId = "666d423e86329950249cafb9";
+                break;
+            case 1:
+                newCategoryId = "666d424286329950249cafba";
+                break;
+            case 2:
+                newCategoryId = "666d424586329950249cafbb";
+                break;
+            case 3:
+                newCategoryId = "666d424a86329950249cafbc";
+                break;
+            case 4:
+                newCategoryId = "666d424f86329950249cafbd";
+                break;
+            case 5:
+                newCategoryId = "666d425186329950249cafbe";
+                break;
+            default:
+                newCategoryId = null;
+        }
+
+        setCategoryId(newCategoryId);
+
+        console.log("index: " + newCategoryId);
+
         setTimeout(async () => {
             try {
-
                 const response = await axios.post(`${process.env.REACT_APP_SERVER}/worries`, {
                     title: title,
                     content: content,
                     nickname: writer,
                     ai_advice: advice,
-                    category_id: 1
+                    category_id: newCategoryId
                 });
 
                 console.log("글이 성공적으로 전송되었습니다.", response.data);
@@ -79,6 +105,16 @@ function Write({setActiveComponent}) {
             setLoading(false);
         }, 3000);
     };
+
+    async function getCategory(categoryId){
+        try {
+            const categories = await axios.get(`${process.env.REACT_APP_SERVER}/categories/${categoryId}`);
+            console.log("categories data: " + categories.data);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     // 보관 버튼 클릭시 팝업이 나오고 팝업에 보관함 버튼 클릭시 보관함으로 이동 실행
     const handleSave = () => {
