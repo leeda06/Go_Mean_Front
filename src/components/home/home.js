@@ -73,7 +73,7 @@ function Home({ onNavigate }) {
     // 클릭한 아이템 인덱스 넘기기
     const handleImageClick = (index) => {
         console.log('클릭한 쓰레기통 인덱스:', index);
-        onNavigate('Write');
+        onNavigate('Write', index);
     };
 
     return (
