@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CategoryList = ({ selected, setSelected, categoryData, textBoxes }) => {
+const CategoryList = ({ selected, setSelected, categoryData }) => {
   return (
       <ul className="list">
         {Object.keys(categoryData).map(category => {
