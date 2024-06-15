@@ -1,32 +1,47 @@
-// src/App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../css/graph.css';
 import BarGraph from './barGraph.js';
-import '../../components/graph/barGraph.js'
-// 값 이름 , 색, 이미지 , class이름 , 그래프 크기 (개수)
-const legendItems = [
-    { category: '건강', color: '연두색', gif: require('../../img/gif/Substract_green.gif'), className: 'green', values: 160 },
-    { category: '금전', color: '노랑색', gif: require('../../img/gif/Substract_yellow.gif'), className: 'yellow', values: 120 },
-    { category: '개인', color: '흰색', gif: require('../../img/gif/Substract_white.gif'), className: 'white', values: 60 },
-    { category: '인간관계', color: '분홍색', gif: require('../../img/gif/Substract_pink.gif'), className: 'pink', values: 90 },
-    { category: '취업', color: '보라색', gif: require('../../img/gif/Substract_purple.gif'), className: 'purple', values: 150 },
-    { category: '학업', color: '파란색', gif: require('../../img/gif/Substract_blue.gif'), className: 'blue', values: 100 }
-];
+import axios from 'axios';
+import { categoryData } from '../record/Data/data';
 
-// 예제 사용법
-const values = legendItems.map(item => item.values); // legendItems에서 값을 추출
+// 각 카테고리의 이름과 id를 포함하는 배열 생성
+const categories = Object.keys(categoryData).map(key => ({
+    category: key,
+    category_id: categoryData[key].id,
+    color: categoryData[key].color,
+    images: categoryData[key].images
+}));
 
 const App = () => {
-    const [activeComponent, setActiveComponent] = useState('Graph');
+    const [worryCounts, setWorryCounts] = useState([]);
 
-    const handleButtonClick = component => {
-        setActiveComponent(component);
-    };
+    useEffect(() => {
+        const fetchWorries = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/worries');
+                const fetchedWorries = response.data;
+
+                const counts = categories.map(item => ({
+                    category: item.category,
+                    count: fetchedWorries.filter(worry => worry.category_id === item.category_id).length
+                }));
+
+                setWorryCounts(counts);
+            } catch (error) {
+                console.error('Error fetching worries:', error);
+            }
+        };
+
+        fetchWorries();
+    }, []);
+
+    const totalWorries = worryCounts.reduce((total, item) => total + item.count, 0);
+    const values = worryCounts.map(item => (totalWorries > 0 ? (item.count / totalWorries) * 100 : 0));
 
     return (
         <div className="app-container">
             <div className="graph-container">
-                <BarGraph values={values} legendItems={legendItems} />
+                <BarGraph values={values} categories={categories} totalWorries={totalWorries} />
             </div>
         </div>
     );
