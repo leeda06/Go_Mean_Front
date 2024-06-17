@@ -5,10 +5,12 @@ const Modal = ({ selectedTextBox, closeModal, img }) => {
   const [comments, setComments] = useState([]);
   const [nickname, setNickname] = useState('');
   const [comment, setComment] = useState('');
+  const [aiAdvice, setAiAdvice] = useState('');
 
   useEffect(() => {
     if (selectedTextBox) {
       fetchComments(selectedTextBox.id);
+      fetchAiAdvice(selectedTextBox.id);
     }
   }, [selectedTextBox]);
 
@@ -18,6 +20,15 @@ const Modal = ({ selectedTextBox, closeModal, img }) => {
       setComments(response.data);
     } catch (error) {
       console.error('Error fetching comments:', error);
+    }
+  };
+
+  const fetchAiAdvice = async (worryId) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/worries/${worryId}`);
+      setAiAdvice(response.data.ai_advice);
+    } catch (error) {
+      console.error('Error fetching AI advice:', error);
     }
   };
 
@@ -59,7 +70,7 @@ const Modal = ({ selectedTextBox, closeModal, img }) => {
               <img className="img" src={img} alt="곰곰이" />
               <div className="name">곰곰이</div>
             </div>
-            <div className="text">친구야, 걱정하지 마...</div>
+            <div className="text">{aiAdvice || '친구야, 걱정하지 마...'}</div>
           </div>
         </div>
         <div className='modal-div modal-comment'>
