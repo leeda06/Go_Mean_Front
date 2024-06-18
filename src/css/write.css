@@ -37,10 +37,10 @@ body {
     height: 700px;
     border-radius: 50px;
     background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 
-        0px 0px 100px rgba(0, 0, 0, 0.08), 
-        inset 0px 0px 30px rgba(0, 0, 0, 0.05), 
-        inset 0px 0px 80px 40px rgba(255, 255, 255, 0.2);
+    box-shadow:
+            0px 0px 100px rgba(0, 0, 0, 0.08),
+            inset 0px 0px 30px rgba(0, 0, 0, 0.05),
+            inset 0px 0px 80px 40px rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(25px);
     z-index: 1000;
 }
@@ -179,7 +179,7 @@ body {
 button.active {
     color: white;
 }
- 
+
 /* 팝업창 위치, 크기, 색, 효과 지정 */
 .Popup {
     position: fixed;
@@ -191,45 +191,53 @@ button.active {
     transform: translate(-50%, -50%);
     z-index: 1000;
 }
-  
-.Popup-Content {
+
+#Popup-Content {
+    width: 300px; /* 원하는 고정 너비 */
+    height: 150px; /* 원하는 고정 높이 */
     padding: 20px;
     text-align: center;
-    border-radius: 30px;
+    border-radius: 40px;
     background-color: white;
     background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 
-        0px 0px 100px rgba(0, 0, 0, 0.08), 
-        inset 0px 0px 30px rgba(0, 0, 0, 0.05), 
-        inset 0px 0px 80px 40px rgba(255, 255, 255, 0.2);
+    box-shadow:
+            0px 0px 100px rgba(0, 0, 0, 0.08),
+            inset 0px 0px 30px rgba(0, 0, 0, 0.05),
+            inset 0px 0px 80px 40px rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(25px);
 }
-  
-.Popup-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
+
+/* 팝업 내부 텍스트 스타일 지정 */
+.popUp-title {
+    font-size: 1.3rem;
     font-weight: bold;
-    cursor: pointer;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.popUp-message {
+    font-size: 0.8rem;
+    color: rgb(195, 195, 195);
+    margin-bottom: 20px;
 }
 
 /* 팝업창 > 보관함 버튼 위치, 크기, 색, 효과 지정 */
-.View-button { 
+.View-button {
     display: inline-block;
     padding: 15px 32px;
     margin: 4px 2px;
-    color: white; 
+    color: white;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     border: white;
-    border-radius: 8px;
+    border-radius: 50px;
     background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 
-        0px 0px 100px rgba(0, 0, 0, 0.08), 
-        inset 0px 0px 30px rgba(0, 0, 0, 0.05), 
-        inset 0px 0px 80px 40px rgba(255, 255, 255, 0.2);
+    box-shadow:
+            0px 0px 100px rgba(0, 0, 0, 0.08),
+            inset 0px 0px 30px rgba(0, 0, 0, 0.05),
+            inset 0px 0px 80px 40px rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(25px);
     cursor: pointer;
 }

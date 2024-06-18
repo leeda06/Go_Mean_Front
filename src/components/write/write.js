@@ -22,27 +22,31 @@ function Write({ setActiveComponent, selectedIndex }) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const inputContent = document.getElementById('Input-Content');
-
         const handleInput = () => {
             const adviceButton = document.getElementById('Advice-button');
-            const solutionButton = document.getElementById('Solution-button');
-
-            if (inputContent.value.trim() !== '') {
+            if (title.trim() !== '' && writer.trim() !== '' && content.trim() !== '') {
+                adviceButton.style.color = 'white';
                 adviceButton.disabled = false;
-                solutionButton.disabled = false;
             } else {
+                adviceButton.style.color = 'gray';
                 adviceButton.disabled = true;
-                solutionButton.disabled = true;
             }
         };
 
-        inputContent.addEventListener('input', handleInput);
+        // inputContent.addEventListener('input', handleInput);
+        handleInput(); // 초기 상태 설정
+
+        document.getElementById('Input-Title').addEventListener('input', handleInput);
+        document.getElementById('Input-Writer').addEventListener('input', handleInput);
+        document.getElementById('Input-Content').addEventListener('input', handleInput);
 
         return () => {
-            inputContent.removeEventListener('input', handleInput);
+            document.getElementById('Input-Title').removeEventListener('input', handleInput);
+            document.getElementById('Input-Writer').removeEventListener('input', handleInput);
+            document.getElementById('Input-Content').removeEventListener('input', handleInput);
+
         };
-    }, []);
+    }, [title, writer, content]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -115,29 +119,29 @@ function Write({ setActiveComponent, selectedIndex }) {
         setActiveComponent('Record');
     };
 
-    useEffect(() => {
-        const adviceButton = document.getElementById('Advice-button');
-        const solutionButton = document.getElementById('Solution-button');
-        const inputContent = document.getElementById('Input-Content');
-
-        inputContent.addEventListener('input', () => {
-            if (inputContent.value.trim() !== '') {
-                adviceButton.style.color = 'white';
-                solutionButton.style.color = 'white';
-            } else {
-                adviceButton.style.color = 'gray';
-                solutionButton.style.color = 'gray';
-            }
-        });
-
-        return () => {
-            inputContent.removeEventListener('input', () => {});
-        };
-    }, []);
-
     const handleDelete = () => {
         setActiveComponent('Home');
     };
+
+    // useEffect(() => {
+    //     const adviceButton = document.getElementById('Advice-button');
+    //     const solutionButton = document.getElementById('Solution-button');
+    //     const inputContent = document.getElementById('Input-Content');
+    //
+    //     inputContent.addEventListener('input', () => {
+    //         if (inputContent.value.trim() !== '') {
+    //             adviceButton.style.color = 'white';
+    //             solutionButton.style.color = 'white';
+    //         } else {
+    //             adviceButton.style.color = 'gray';
+    //             solutionButton.style.color = 'gray';
+    //         }
+    //     });
+    //
+    //     return () => {
+    //         inputContent.removeEventListener('input', () => {});
+    //     };
+    // }, []);
 
     return (
         <div>
@@ -153,18 +157,22 @@ function Write({ setActiveComponent, selectedIndex }) {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             placeholder='제목을 입력하세요'
+                            disabled={isAdviceGiven}
                         />
                         <input
                             id='Input-Writer'
                             value={writer}
                             onChange={(e) => setWriter(e.target.value)}
                             placeholder='작성자'
+                            disabled={isAdviceGiven}
+
                         />
                         <textarea
                             id='Input-Content'
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                             placeholder='어떤 고민을 가지고 있나요?'
+                            disabled={isAdviceGiven}
                         />
                         <div id='Advice' className='Advice-container'>
                             {loading ? (
@@ -186,34 +194,40 @@ function Write({ setActiveComponent, selectedIndex }) {
                         <button
                             type={isAdviceGiven ? 'button' : 'submit'}
                             id='Advice-button'
-                            className={title && writer && content ? 'active' : ''}
+                            className={(title && writer && content) ? 'active' : ''}
                             disabled={!title || !writer || !content}
                             onClick={isAdviceGiven ? handleSave : handleSubmit}
                         >
                             {isAdviceGiven ? '보관' : '조언받기'}
                         </button>
-                        <button
-                            type='button'
-                            id='Solution-button'
-                            className={title && writer && content ? 'active' : ''}
-                            disabled={!title || !writer || !content}
-                        >
-                            해소
-                        </button>
+                        {isAdviceGiven && (
+                            <button
+                                type='button'
+                                id='Solution-button'
+                                className='active'
+                                onClick={handleSave}
+                            >
+                                해소
+                            </button>
+                        )}
+
                     </form>
                 </div>
 
+                {/* 팝업창 */}
                 {showPopup && (
                     <div className='Popup'>
-                        <div className='Popup-Content'>
-                            <h1>&nbsp;&nbsp;고민이 보관 되었습니다.&nbsp;&nbsp;</h1>
-                            <p>저장된 고민을 확인해보세요.</p>
-                            <button className='View-button' onClick={moveTorecord}>
-                                보관함
+                        <div id='Popup-Content'>
+                            <p className='popUp-title'>&nbsp;&nbsp;고민이 보관 되었습니다.&nbsp;&nbsp;</p>
+                            <p className='popUp-message'>저장된 고민을 확인해보세요.</p>
+                            <button
+                                className='View-button'
+                                onClick={moveTorecord}>보관함
                             </button>
                         </div>
                     </div>
                 )}
+
 
                 <button className='delete-button' onClick={handleDelete}>
                     <i className='bi bi-x'></i>
