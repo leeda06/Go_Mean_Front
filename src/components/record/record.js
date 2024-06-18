@@ -29,7 +29,7 @@ const Record = () => {
 
     const fetchWorries = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/worries');
+            const response = await axios.get(`${process.env.REACT_APP_SERVER}/worries`);
             const fetchedWorries = response.data;
             const categorizedWorries = categorizeWorries(fetchedWorries);
             setTextBoxes(categorizedWorries);

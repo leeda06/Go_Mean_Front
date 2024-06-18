@@ -57,22 +57,22 @@ function Write({ setActiveComponent, selectedIndex }) {
         let newCategoryId;
         switch (selectedIndex) {
             case 0:
-                newCategoryId = '666d423e86329950249cafb9';
+                newCategoryId = '667114bdf81f1fd0f6a26a25';
                 break;
             case 1:
-                newCategoryId = '666d424286329950249cafba';
+                newCategoryId = '667114bdf81f1fd0f6a26a26';
                 break;
             case 2:
-                newCategoryId = '666d424586329950249cafbb';
+                newCategoryId = '667114bdf81f1fd0f6a26a27';
                 break;
             case 3:
-                newCategoryId = '666d424a86329950249cafbc';
+                newCategoryId = '667114bdf81f1fd0f6a26a28';
                 break;
             case 4:
-                newCategoryId = '666d424f86329950249cafbd';
+                newCategoryId = '667114bdf81f1fd0f6a26a29';
                 break;
             case 5:
-                newCategoryId = '666d425186329950249cafbe';
+                newCategoryId = '667114bdf81f1fd0f6a26a2a';
                 break;
             default:
                 newCategoryId = null;

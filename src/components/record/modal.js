@@ -16,7 +16,7 @@ const Modal = ({ selectedTextBox, closeModal, img }) => {
 
   const fetchComments = async (worryId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/comments/${worryId}`);
+      const response = await axios.get(`${process.env.REACT_APP_SERVER}/comments/${worryId}`);
       setComments(response.data);
     } catch (error) {
       console.error('Error fetching comments:', error);
@@ -25,7 +25,7 @@ const Modal = ({ selectedTextBox, closeModal, img }) => {
 
   const fetchAiAdvice = async (worryId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/worries/${worryId}`);
+      const response = await axios.get(`${process.env.REACT_APP_SERVER}/worries/${worryId}`);
       setAiAdvice(response.data.ai_advice);
     } catch (error) {
       console.error('Error fetching AI advice:', error);
@@ -39,7 +39,7 @@ const Modal = ({ selectedTextBox, closeModal, img }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/comments', {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER}/comments`, {
         worry_id: selectedTextBox.id,
         nickname,
         comment,

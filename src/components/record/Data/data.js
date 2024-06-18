@@ -13,10 +13,10 @@ import Sub_purple from '../../../img/substract/Substract_purple.png';
 import Sub_blue from '../../../img/substract/Substract_blue.png';
 
 export const categoryData = {
-  '건강': { id: '666d423e86329950249cafb9', color: 'green', images: [Sub_green, Sub_green_off] },
-  '금전': { id: '666d424286329950249cafba', color: 'yellow', images: [Sub_yellow, Sub_yellow_off] },
-  '개인': { id: '666d424586329950249cafbb', color: 'white', images: [Sub_white, Sub_white_off] },
-  '인간관계': { id: '666d424a86329950249cafbc', color: 'pink', images: [Sub_pink, Sub_pink_off] },
-  '취업': { id: '666d424f86329950249cafbd', color: 'purple', images: [Sub_purple, Sub_purple_off] },
-  '학업': { id: '666d425186329950249cafbe', color: 'blue', images: [Sub_blue, Sub_blue_off] }
+  '건강': { id: '667114bdf81f1fd0f6a26a25', color: 'green', images: [Sub_green, Sub_green_off] },
+  '금전': { id: '667114bdf81f1fd0f6a26a26', color: 'yellow', images: [Sub_yellow, Sub_yellow_off] },
+  '개인': { id: '667114bdf81f1fd0f6a26a27', color: 'white', images: [Sub_white, Sub_white_off] },
+  '인간관계': { id: '667114bdf81f1fd0f6a26a28', color: 'pink', images: [Sub_pink, Sub_pink_off] },
+  '취업': { id: '667114bdf81f1fd0f6a26a29', color: 'purple', images: [Sub_purple, Sub_purple_off] },
+  '학업': { id: '667114bdf81f1fd0f6a26a2a', color: 'blue', images: [Sub_blue, Sub_blue_off] }
 };
