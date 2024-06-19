@@ -21,7 +21,7 @@ nav {
   border-top-right-radius: 100px;
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
-  border: 3px solid #8a8a8a!important;
+  border: 3px solid #cacaca6c!important;
   background-image: linear-gradient(to 45deg, #5E5E5F, #646567),
     linear-gradient(to 45deg, #636365, #6C6D6F, #9D9E9F, #6A6862, #818183, #9D9E9F, #818183) !important;
   background-origin: border-box;
