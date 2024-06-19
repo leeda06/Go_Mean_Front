@@ -39,8 +39,6 @@
     transform: rotate(180deg);
     border: 3px solid transparent;
     border-radius: 10px;
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
     color: #979797;
     gap: var(--gap-boxes);
 }

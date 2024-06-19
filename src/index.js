@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import '../src/css/index.css'
 
 // 홈화면 렌더링
 import Home from './components/home/home.js';

@@ -2,7 +2,8 @@ nav {
   position: fixed;
   left: calc(50% - 150px);
   bottom: 120px;
-  z-index: 1; /* 다른 요소들보다 위에 표시되도록 설정 */
+  z-index: 1;
+  /* 다른 요소들보다 위에 표시되도록 설정 */
 }
 
 
@@ -20,6 +21,11 @@ nav {
   border-top-right-radius: 100px;
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
+  border: 3px solid #8a8a8a!important;
+  background-image: linear-gradient(to 45deg, #5E5E5F, #646567),
+    linear-gradient(to 45deg, #636365, #6C6D6F, #9D9E9F, #6A6862, #818183, #9D9E9F, #818183) !important;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
   padding: 10px;
 }
 
