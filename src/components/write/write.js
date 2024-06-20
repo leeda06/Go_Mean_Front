@@ -36,16 +36,22 @@ function Write({ setActiveComponent, selectedIndex }) {
         // inputContent.addEventListener('input', handleInput);
         handleInput(); // 초기 상태 설정
 
-        document.getElementById('Input-Title').addEventListener('input', handleInput);
-        document.getElementById('Input-Writer').addEventListener('input', handleInput);
-        document.getElementById('Input-Content').addEventListener('input', handleInput);
+        const inputTitle = document.getElementById('Input-Title');
+        const inputWriter = document.getElementById('Input-Writer');
+        const inputContent = document.getElementById('Input-Content');
 
+        // 컴포넌트가 마운트될 때 이벤트 리스너 추가
+        inputTitle.addEventListener('input', handleInput);
+        inputWriter.addEventListener('input', handleInput);
+        inputContent.addEventListener('input', handleInput);
+
+        // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
         return () => {
-            document.getElementById('Input-Title').removeEventListener('input', handleInput);
-            document.getElementById('Input-Writer').removeEventListener('input', handleInput);
-            document.getElementById('Input-Content').removeEventListener('input', handleInput);
-
+            inputTitle.removeEventListener('input', handleInput);
+            inputWriter.removeEventListener('input', handleInput);
+            inputContent.removeEventListener('input', handleInput);
         };
+
     }, [title, writer, content]);
 
     const handleSubmit = async (e) => {
@@ -146,12 +152,17 @@ function Write({ setActiveComponent, selectedIndex }) {
     return (
         <div>
             <div className='background-container'>
-                <img src={Background} className='background' />
+                <img
+                    src={Background}
+                    className='background' />
             </div>
 
+            {/* 고민작성 컨테이너 */}
             <div className='Write-Container'>
                 <div className='Write-Gomean'>
-                    <form className='Input-Text' onSubmit={handleSubmit}>
+                    <form
+                        className='Input-Text'
+                        onSubmit={handleSubmit}>
                         <input
                             id='Input-Title'
                             value={title}
@@ -165,7 +176,6 @@ function Write({ setActiveComponent, selectedIndex }) {
                             onChange={(e) => setWriter(e.target.value)}
                             placeholder='작성자'
                             disabled={isAdviceGiven}
-
                         />
                         <textarea
                             id='Input-Content'
@@ -174,23 +184,30 @@ function Write({ setActiveComponent, selectedIndex }) {
                             placeholder='어떤 고민을 가지고 있나요?'
                             disabled={isAdviceGiven}
                         />
-                        <div id='Advice' className='Advice-container'>
+                        <div
+                            id='Advice'
+                            className="Advice-container">
                             {loading ? (
-                                <div className='Loading'>
-                                    <img src={Loding} alt='Loading...' />
+                                <div className="Loading">
+                                    <img src={Loding} alt="Loading..." />
                                 </div>
                             ) : (
                                 advice && <div>{advice}</div>
                             )}
                         </div>
 
+                        {/* 곰곰이 컨테이너 */}
                         {showGomGomE && (
                             <div id='GomGomE'>
-                                <img src={GomGomE} className='GomGomE' />
-                                &nbsp; 곰곰이
+                                <img
+                                    src={GomGomE}
+                                    className='GomGomE' />
+                                &nbsp;
+                                곰곰이
                             </div>
                         )}
 
+                        {/* 버튼 */}
                         <button
                             type={isAdviceGiven ? 'button' : 'submit'}
                             id='Advice-button'
@@ -200,17 +217,6 @@ function Write({ setActiveComponent, selectedIndex }) {
                         >
                             {isAdviceGiven ? '보관' : '조언받기'}
                         </button>
-                        {isAdviceGiven && (
-                            <button
-                                type='button'
-                                id='Solution-button'
-                                className='active'
-                                onClick={handleSave}
-                            >
-                                해소
-                            </button>
-                        )}
-
                     </form>
                 </div>
 
@@ -228,9 +234,10 @@ function Write({ setActiveComponent, selectedIndex }) {
                     </div>
                 )}
 
-
-                <button className='delete-button' onClick={handleDelete}>
-                    <i className='bi bi-x'></i>
+                <button
+                    className='delete-button'
+                    onClick={handleDelete}><i
+                    className='bi bi-x'></i>
                 </button>
             </div>
         </div>
