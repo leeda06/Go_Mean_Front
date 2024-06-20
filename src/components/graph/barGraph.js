@@ -1,11 +1,7 @@
-// src/components/BarGraph.js
 import React from 'react';
 
 // 바 그래프 컴포넌트 정의
-const BarGraph = ({ values, legendItems }) => {
-    // 값 배열에서 최대값 찾기
-    const maxValue = Math.max(...values);
-
+const BarGraph = ({ values, legendItems, totalWorries }) => {
     return (
         <div className="bar-graph-container">
             {/* 바 그래프 컨테이너 */}
@@ -13,9 +9,9 @@ const BarGraph = ({ values, legendItems }) => {
                 {values.map((value, index) => (
                     <div key={index} className={`bar-item`}>
                         {/* 바 */}
-                        <div className={`bar ${legendItems[index].className}`} style={{ height: `${(value / maxValue) * 50}vh` }}>
+                        <div className={`bar ${legendItems[index].className}`} style={{ height: `${value * 0.6}vh` }}>
                             {/* 이미지(gif) */}
-                            <img src={legendItems[index].gif} alt={`Image ${index}`} style={{ bottom: `${(value / maxValue) * 52}vh` }} className="bar-image" />
+                            <img src={legendItems[index].gif} alt={`Image ${index}`} style={{ bottom: `${value * 0.6}vh` }} className="bar-image" />
                         </div>
                     </div>
                 ))}
@@ -23,7 +19,9 @@ const BarGraph = ({ values, legendItems }) => {
             {/* 범례 컨테이너 */}
             <div className="legend-container">
                 {legendItems.map((item, index) => (
-                    <span key={index} className="legend-item" style={{ color: item.color }}><strong>{item.category}</strong> : {item.color}</span>
+                    <span key={index} className="legend-item" style={{ color: 'white' }}>
+                        <strong>{item.category}</strong> : {item.color}
+                    </span>
                 ))}
             </div>
         </div>

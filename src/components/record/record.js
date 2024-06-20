@@ -1,26 +1,53 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../../css/recode.css';
 import img from '../../img/image.png';
-import CategoryList from './categoryList.js';
-import TextBoxContainer from './textBoxContainer.js';
-import Modal from './modal.js';
-import { categoryData, textBoxes } from './Data/data.js';
+import CategoryList from './categoryList';
+import TextBoxContainer from './textBoxContainer';
+import Modal from './modal';
+import { categoryData } from './Data/data.js';
+import axios from 'axios';
 
-const App = () => {
-    const [selected, setSelected] = useState({ category: '건강', color: 'green' });
+const Record = () => {
+    const [selected, setSelected] = useState({ category: '건강', color: 'green', id: categoryData['건강'].id });
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTextBox, setSelectedTextBox] = useState(null);
+    const [textBoxes, setTextBoxes] = useState({});
     const textBoxesRef = useRef([]);
     const containerRef = useRef(null);
-    const selectedChange = selected;
+
+    useEffect(() => {
+        fetchWorries();
+    }, [selected]);
 
     useEffect(() => {
         positionTextBoxes();
-    }, [selected]);
+    }, [textBoxes]);
 
     useEffect(() => {
         textBoxesRef.current = [];
     }, [selected]);
+
+    const fetchWorries = async () => {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_SERVER}/worries`);
+            const fetchedWorries = response.data;
+            const categorizedWorries = categorizeWorries(fetchedWorries);
+            setTextBoxes(categorizedWorries);
+        } catch (error) {
+            console.error('Error fetching worries:', error);
+        }
+    };
+
+    const categorizeWorries = (worries) => {
+        return worries.reduce((acc, worry) => {
+            const { category_id } = worry;
+            if (!acc[category_id]) {
+                acc[category_id] = [];
+            }
+            acc[category_id].push(worry);
+            return acc;
+        }, {});
+    };
 
     const positionTextBoxes = () => {
         const boxes = textBoxesRef.current.filter(Boolean);
@@ -28,7 +55,7 @@ const App = () => {
 
         if (!container || boxes.length === 0) return;
 
-        const columns = 3; // 열 개수
+        const columns = 3;
         const columnHeights = Array(columns).fill(0);
         const columnWidth = (container.offsetWidth - (columns - 1) * 40) / columns;
 
@@ -63,7 +90,7 @@ const App = () => {
                 <div className='div'>
                     <CategoryList
                         selected={selected}
-                        setSelected={setSelected}
+                        setSelected={(newSelected) => setSelected({ ...newSelected, id: categoryData[newSelected.category].id })}
                         categoryData={categoryData}
                         textBoxes={textBoxes}
                     />
@@ -91,4 +118,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Record;

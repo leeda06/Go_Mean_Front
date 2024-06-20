@@ -1,7 +1,7 @@
 :root {
-    --boxes-width: 1000px;
-    --gap-boxes: 30px;
-    --box-width: calc(calc(var(--boxes-width) - calc(var(--gap-boxes) * 6)) / 3);
+    --boxes-width: 1020px;
+    --gap-boxes: 10px;
+    --box-width: calc(calc(var(--boxes-width)) / 4 + 10px);
     --list-width: 200px;
 }
 
@@ -9,6 +9,7 @@
 * {
     padding: 0;
     margin: 0;
+    user-select: none;
 }
 
 body {
@@ -50,7 +51,7 @@ body::-webkit-scrollbar {
 /* 리스트 스타일 */
 .list {
     list-style: none;
-    margin-right: 50px;
+    margin-right: 70px;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -86,28 +87,27 @@ li img {
     font-size: 28px;
 }
 
-/* 텍스트 박스 스타일 */
 .text-boxes {
     display: flex;
     flex-direction: row;
     width: var(--boxes-width);
+    height: fit-content;
     flex-wrap: wrap;
-    padding: 10px 0;
+    overflow: hidden;
+    overflow-y: auto;
+    margin: 10px 0;
     gap: 4px;
     position: relative;
+    max-height: 65vh;
+    padding-bottom: 60px;
 }
 
-.text-boxes::after {
-    content: "";
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 20vh;
-    background: linear-gradient(to top, rgba(0, 0, 0, 1) 50%, transparent);
+.text-boxes::-webkit-scrollbar {
+    width: 0;
 }
 
 .text-box {
+    cursor: pointer;
     position: absolute;
     width: var(--box-width);
     height: fit-content;
@@ -382,7 +382,7 @@ li img {
 
 /* 입력 스타일 */
 input {
-    cursor: pointer;
+    cursor:text;
     color: #ffffff;
     background-color: #ffffff00;
 }

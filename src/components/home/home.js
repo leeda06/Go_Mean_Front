@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
+// 홈화면 CSS 파일
+import '../../css/home.css';
+
+// 쓰레기통 슬라이드 컴포넌트
+import CircularCarousel from './circularCarousel';
+
 // 이미지 파일 (제목, 쓰레기통)
 import title from '../../img/title.png';
-import trash1 from '../../img/trash-1.png';
-import trash2 from '../../img/trash-2.png';
-import trash3 from '../../img/trash-3.png';
-import trash4 from '../../img/trash-4.png';
-import trash5 from '../../img/trash-5.png';
-import trash6 from '../../img/trash-6.png';
-
-// 홈화면 CSS 파일
-import '../../css/home.css'; 
-// 쓰레기통 슬라이드 파일
-import CircularCarousel from './circularCarousel.js';
+import trash1 from '../../img/trash-1.gif';
+import trash2 from '../../img/trash-2.gif';
+import trash3 from '../../img/trash-3.gif';
+import trash4 from '../../img/trash-4.gif';
+import trash5 from '../../img/trash-5.gif';
+import trash6 from '../../img/trash-6.gif';
 
 // 백그라운드 원 색깔 배열
 const circleColors = [
@@ -24,9 +25,6 @@ const circleColors = [
     '#507F85',
 ];
 
-// 쓰레기통 슬라이드 이미지 배열
-const trashImages = [trash1, trash2, trash3, trash4, trash5, trash6];
-
 // 제목 필터값 배열
 const filterEffects = [
     '',
@@ -37,15 +35,16 @@ const filterEffects = [
     'brightness(1.0) saturate(120%) hue-rotate(95deg) contrast(90%)'
 ];
 
-function Home() {
-    // 필요한 Hook 작성
+// 쓰레기통 슬라이드 이미지 배열
+const trashImages = [trash1, trash2, trash3, trash4, trash5, trash6];
+
+function Home({ onNavigate }) {
     const [curSlide, setCurSlide] = useState(0);
-    const [activeComponent, setActiveComponent] = useState('Home');
     const [gradientStyle, setGradientStyle] = useState({
         background: `${circleColors[0]}`
     });
 
-    // 쓰레기통 슬라이드에 맞춰 백그라운드 원의 색이 바뀌도록 지정
+    // 백그라운드 원 색상변경 슬라이드
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurSlide(prevState =>
@@ -57,17 +56,13 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            const nextIndex = curSlide === trashImages.length - 1 ? 0 : curSlide + 1;
-            setGradientStyle({
-                background: `linear-gradient(to right, ${circleColors[curSlide]}, ${circleColors[nextIndex]})`
-            });
-        }, 100);
-
-        return () => clearInterval(intervalId);
+        const nextIndex = curSlide === trashImages.length - 1 ? 0 : curSlide + 1;
+        setGradientStyle({
+            background: `linear-gradient(to right, ${circleColors[curSlide]}, ${circleColors[nextIndex]})`
+        });
     }, [curSlide]);
 
-    // 배경색을 검은색으로 지정
+    // 배경색 지정
     useEffect(() => {
         document.body.style.backgroundColor = '#000000';
         return () => {
@@ -75,19 +70,20 @@ function Home() {
         };
     }, []);
 
-    // 버튼 누를 시 효과가 보이도록 지정
-    const handleButtonClick = component => {
-        setActiveComponent(component);
+    // 클릭한 아이템 인덱스 넘기기
+    const handleImageClick = (index) => {
+        console.log('클릭한 쓰레기통 인덱스:', index);
+        onNavigate('Write', index);
     };
 
     return (
         <div className="Home">
-            {/* 제목 이미지에 슬라이드에 맞춰 필터 입히기 */}
+            {/* 타이틀 이미지 필터 슬라이드 */}
             <div className="Home-Title">
                 <img src={title} alt="Title Image" id="Title-Image" style={{ filter: filterEffects[curSlide] }} />
             </div>
             
-            {/* 백그라운드 원 슬라이드에 맞춰 색깔 바꾸기 */}
+            {/* 백그라운드 원 색상변경 슬라이드 */}
             <div
                 className="Circles"
                 style={{
@@ -98,10 +94,10 @@ function Home() {
                 }}
             ></div>
 
-            {/* 쓰레기통 슬라이드 파일 */}
-            <CircularCarousel items={trashImages} interval={8000} />
+            {/* 쓰레기통 슬라이드 컴포넌트트 */}
+            <CircularCarousel items={[trash1, trash2, trash3, trash4, trash5, trash6]} interval={8000} onImageClick={handleImageClick} />
 
-            {/* Gomean 설명 글 */}
+            {/* 설명글 */}
             <div className="Content-Text">
                 <p className="Title">
                     Go mean은 <br /> 어떻게 만들어졌나요?
@@ -121,7 +117,7 @@ function Home() {
                 </p>
             </div>
 
-            {/* 지정색 설명 글 */}
+            {/* 색상 설명글 */}
             <div className="Explanation-Text">
                 <p className="Explanation Health">건강</p>
                 <p className="Color Green">&nbsp;: 연두색</p>
@@ -141,10 +137,8 @@ function Home() {
                 <p className="Explanation Study">학업</p>
                 <p className="Color Blue">&nbsp;: 파란색</p>
             </div>
-
         </div>
     );
 }
-        
+
 export default Home;
-        

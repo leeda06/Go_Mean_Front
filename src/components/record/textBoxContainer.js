@@ -1,26 +1,24 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 const TextBoxContainer = ({ selected, textBoxes, categoryData, textBoxesRef, containerRef, openModal }) => {
-    console.log(selected.category)
-  return (
-    <div className="text-boxes" ref={containerRef}>
-      {textBoxes[selected.category].map(({ id, name, title, content, date }, index) => (
-        <div
-          key={id}
-          className={`text-box ${categoryData[selected.category].color}`}
-          ref={el => textBoxesRef.current[index] = el || undefined}
-          onClick={() => openModal({ id, name, title, content, date })}
-        >
-          <div className='title'>{title}</div>
-          <div className='name'>{name}</div>
-          <div className='text'>{content}</div>
-          <div className='date'>{date}</div>
-          <img className='img' src={`${categoryData[selected.category].images[0]}`} />
+    return (
+        <div className="text-boxes" ref={containerRef}>
+            {textBoxes[selected.id] && textBoxes[selected.id].map(({ id, nickname, title, content, created_at }, index) => (
+                <div
+                    key={id}
+                    className={`text-box ${categoryData[selected.category].color}`}
+                    ref={el => textBoxesRef.current[index] = el || undefined}
+                    onClick={() => openModal({ id, nickname, title, content, created_at })}
+                >
+                    <div className='title'>{title}</div>
+                    <div className='name'>{nickname}</div>
+                    <div className='text'>{content}</div>
+                    <div className='date'>{new Date(created_at).toLocaleDateString()}</div>
+                    <img className='img' src={`${categoryData[selected.category].images[0]}`} alt={`${selected.category}`} />
+                </div>
+            ))}
         </div>
-      ))}
-    </div>
-  );
+    );
 };
 
 export default TextBoxContainer;
