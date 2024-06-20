@@ -167,12 +167,13 @@ body {
 
 #Advice-button {
     bottom: 4%;
-    right: 20%;
+    right: 8%;
 }
 
 #Solution-button {
     bottom: 4%;
-    right: 8%;
+    right: 20%;
+    color: white;
 }
 
 /* 모든 콘텐츠 입력시 효과 */
@@ -197,7 +198,7 @@ button.active {
     height: 150px; /* 원하는 고정 높이 */
     padding: 20px;
     text-align: center;
-    border-radius: 40px;
+    border-radius: 30px;
     background-color: white;
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow:
@@ -205,21 +206,29 @@ button.active {
             inset 0px 0px 30px rgba(0, 0, 0, 0.05),
             inset 0px 0px 80px 40px rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(25px);
+    overflow: hidden; /* 내부 텍스트가 넘칠 때 숨기기 */
 }
 
 /* 팝업 내부 텍스트 스타일 지정 */
 .popUp-title {
-    font-size: 1.3rem;
-    font-weight: bold;
+    font-size: 1.5rem; /* 제목 폰트 크기 */
     color: white;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .popUp-message {
-    font-size: 0.8rem;
-    color: rgb(195, 195, 195);
+    font-size: 1rem; /* 메시지 폰트 크기 */
+    color: rgb(173, 171, 171);
     margin-bottom: 20px;
+}
+
+.Popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 /* 팝업창 > 보관함 버튼 위치, 크기, 색, 효과 지정 */
@@ -232,7 +241,7 @@ button.active {
     text-decoration: none;
     font-size: 16px;
     border: white;
-    border-radius: 50px;
+    border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow:
             0px 0px 100px rgba(0, 0, 0, 0.08),
